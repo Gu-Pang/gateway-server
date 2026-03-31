@@ -1,5 +1,15 @@
 services:
   gateway-server:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8090:8090"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - gupang-network
+
+networks:
+  gupang-network:
+    external: true
