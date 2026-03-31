@@ -1,0 +1,5 @@
+services:
+  gateway-server:
+    build: .
+    ports:
+      - "8090:8090"
