@@ -1,5 +1,6 @@
 services:
   gateway-server:
+    container_name: gateway-server
     build:
       context: .
       dockerfile: Dockerfile
