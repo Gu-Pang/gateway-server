@@ -8,6 +8,8 @@ services:
       - "8090:8090"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8100
+      - KEYCLOAK_REALM=Gu-Pang
     networks:
       - gupang-network
 

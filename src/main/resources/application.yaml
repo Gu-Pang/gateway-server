@@ -33,6 +33,11 @@ spring:
               uri: http://company-server:19050
               predicates:
                 - Path=/api/v1/companies/**, /api/v1/products/**
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_AUTH_SERVER_URL}/realms/${KEYCLOAK_REALM}
 
 eureka:
   client:
