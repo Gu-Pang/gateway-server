@@ -41,16 +41,38 @@ public class SecurityConfig {
         return jwtDecoder;
     }
 
+    /*
+     * 나중에 이걸로 다시 바꿔야함
+     * 
+     * @Bean
+     * public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
+     * Exception {
+     * http
+     * .csrf(AbstractHttpConfigurer::disable)
+     * .sessionManagement(session -> session
+     * .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+     * .authorizeHttpRequests(auth -> auth
+     * .requestMatchers(HttpMethod.POST, "/api/v1/auth/login",
+     * "/api/v1/users").permitAll()
+     * .requestMatchers("/error").permitAll()
+     * .anyRequest().authenticated())
+     * .oauth2ResourceServer(oauth2 -> oauth2
+     * .jwt(jwt -> jwt.decoder(jwtDecoder())))
+     * .addFilterAfter(headerPropagationFilter,
+     * BearerTokenAuthenticationFilter.class);
+     * 
+     * return http.build();
+     * }
+     */
+
+    // 개발용으로 일단 모든 요청 허용
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain devSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/users").permitAll()
-                        .requestMatchers("/error").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.decoder(jwtDecoder())))
                 .addFilterAfter(headerPropagationFilter, BearerTokenAuthenticationFilter.class);
