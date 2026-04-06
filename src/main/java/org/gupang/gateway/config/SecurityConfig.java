@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
-//TODO : id도 role처럼 keycloak에 속성 추가해야 할듯?
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

@@ -46,7 +46,7 @@ public class HeaderPropagationFilter implements Filter {
         httpRequest = new HttpServletRequestWrapper(httpRequest) {
             @Override
             public String getHeader(String n) {
-                if ("X-User-KeycloakId".equalsIgnoreCase(n))
+                if ("X-User-UserId".equalsIgnoreCase(n))
                     return keycloakId;
                 if ("X-User-Username".equalsIgnoreCase(n))
                     return username;
@@ -57,7 +57,7 @@ public class HeaderPropagationFilter implements Filter {
 
             @Override
             public Enumeration<String> getHeaders(String name) {
-                if ("X-User-KeycloakId".equalsIgnoreCase(name))
+                if ("X-User-UserId".equalsIgnoreCase(name))
                     return keycloakId != null ? Collections.enumeration(Collections.singletonList(keycloakId))
                             : Collections.emptyEnumeration();
                 if ("X-User-Username".equalsIgnoreCase(name))
@@ -74,12 +74,12 @@ public class HeaderPropagationFilter implements Filter {
                 List<String> names = Collections.list(super.getHeaderNames());
 
                 // 위변조 방지
-                names.removeIf(n -> n.equalsIgnoreCase("X-User-KeycloakId") ||
+                names.removeIf(n -> n.equalsIgnoreCase("X-User-UserId") ||
                         n.equalsIgnoreCase("X-User-Username") ||
                         n.equalsIgnoreCase("X-User-Role"));
 
                 if (keycloakId != null)
-                    names.add("X-User-KeycloakId");
+                    names.add("X-User-UserId");
                 if (username != null)
                     names.add("X-User-Username");
                 if (role != null)
